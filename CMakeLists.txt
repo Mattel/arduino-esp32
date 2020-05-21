@@ -74,8 +74,12 @@ set(LIBRARY_INCLUDEDIRS)
 
 # Honor sdkconfig selections
 if(CONFIG_ARDUINO_SELECTIVE_ArduinoOTA)
-    list(APPEND LIBRARY_SRCS libraries/ArduinoOTA/src/ArduinoOTA.cpp)
-    list(APPEND LIBRARY_INCLUDEDIRS libraries/ArduinoOTA/src)
+    list(APPEND LIBRARY_SRCS
+            libraries/ArduinoOTA/src/ArduinoOTA.cpp
+            libraries/Update/src/Updater.cpp)
+    list(APPEND LIBRARY_INCLUDEDIRS
+            libraries/ArduinoOTA/src
+            libraries/Update/src)
 endif()
 
 if(CONFIG_ARDUINO_SELECTIVE_AsyncUDP)
