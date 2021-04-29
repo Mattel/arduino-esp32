@@ -53,14 +53,14 @@ set(LIBRARY_SRCS
   libraries/FS/src/vfs_api.cpp
   libraries/HTTPClient/src/HTTPClient.cpp
   libraries/HTTPUpdate/src/HTTPUpdate.cpp
-  libraries/LITTLEFS/src/LITTLEFS.cpp
+  #libraries/LITTLEFS/src/LITTLEFS.cpp
   libraries/NetBIOS/src/NetBIOS.cpp
   libraries/Preferences/src/Preferences.cpp
-  libraries/RainMaker/src/RMaker.cpp
-  libraries/RainMaker/src/RMakerNode.cpp
-  libraries/RainMaker/src/RMakerParam.cpp
-  libraries/RainMaker/src/RMakerDevice.cpp
-  libraries/RainMaker/src/RMakerType.cpp
+#  libraries/RainMaker/src/RMaker.cpp
+#  libraries/RainMaker/src/RMakerNode.cpp
+#  libraries/RainMaker/src/RMakerParam.cpp
+#  libraries/RainMaker/src/RMakerDevice.cpp
+#  libraries/RainMaker/src/RMakerType.cpp
   libraries/SD_MMC/src/SD_MMC.cpp
   libraries/SD/src/SD.cpp
   libraries/SD/src/sd_diskio.cpp
@@ -138,10 +138,10 @@ set(includedirs
   libraries/FS/src
   libraries/HTTPClient/src
   libraries/HTTPUpdate/src
-  libraries/LITTLEFS/src
+  #libraries/LITTLEFS/src
   libraries/NetBIOS/src
   libraries/Preferences/src
-  libraries/RainMaker/src
+#  libraries/RainMaker/src
   libraries/SD_MMC/src
   libraries/SD/src
   libraries/SimpleBLE/src
@@ -158,14 +158,11 @@ set(includedirs
 
 set(srcs ${CORE_SRCS} ${LIBRARY_SRCS} ${BLE_SRCS})
 set(priv_includes cores/esp32/libb64)
-set(requires spi_flash mbedtls mdns esp_adc_cal)
-set(priv_requires fatfs nvs_flash app_update spiffs bootloader_support openssl bt arduino_tinyusb main)
+set(requires spi_flash mbedtls mdns esp_adc_cal wifi_provisioning)
+set(priv_requires fatfs nvs_flash app_update spiffs bootloader_support openssl bt)
 
 if(NOT CONFIG_ARDUINO_SELECTIVE_COMPILATION OR CONFIG_ARDUINO_SELECTIVE_ArduinoOTA)
   list(APPEND priv_requires esp_https_ota)
-endif()
-if(NOT CONFIG_ARDUINO_SELECTIVE_COMPILATION OR CONFIG_ARDUINO_SELECTIVE_LITTLEFS)
-  list(APPEND priv_requires esp_littlefs)
 endif()
 
 idf_component_register(INCLUDE_DIRS ${includedirs} PRIV_INCLUDE_DIRS ${priv_includes} SRCS ${srcs} REQUIRES ${requires} PRIV_REQUIRES ${priv_requires})
